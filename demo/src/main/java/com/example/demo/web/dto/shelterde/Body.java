@@ -1,4 +1,4 @@
-package com.example.demo.shelterde.shelterde;
+package com.example.demo.web.dto.shelterde;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

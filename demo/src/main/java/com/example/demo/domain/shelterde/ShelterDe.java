@@ -1,4 +1,4 @@
-package com.example.demo.shelterde.shelterdedto;
+package com.example.demo.domain.shelterde;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-public class ShelterDeDto {
+public class ShelterDe { // DB에 테이블 ShelterDe로 인서트 됨. 이름 변경함.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

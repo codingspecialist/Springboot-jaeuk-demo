@@ -1,4 +1,6 @@
-package com.example.demo.shelterde.shelterde;
+package com.example.demo.web.dto.shelterde;
+
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Response {
-
-    private Header header;
-    private Body body;
+public class Items {
+    private List<Item> item;
 }

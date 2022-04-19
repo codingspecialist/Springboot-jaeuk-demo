@@ -1,14 +1,16 @@
-package com.example.demo.shelterde.service;
+package com.example.demo.service;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.demo.shelterde.shelterde.ShelterDeRepository;
-import com.example.demo.shelterde.shelterde.ShelterDeResponseDto;
-import com.example.demo.shelterde.shelterdedto.ShelterDeDto;
+import com.example.demo.domain.shelterde.ShelterDe;
+import com.example.demo.domain.shelterde.ShelterDeRepository;
+import com.example.demo.web.dto.shelterde.ShelterDeResponseDto;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -19,11 +21,15 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class ShelterDeService {
 
-    private final ShelterDeRepository repository;
+    private final ShelterDeRepository shelterDeRepository;
+
+    public Page<ShelterDe> 전체보기(PageRequest pr) {
+        return shelterDeRepository.findAll(pr);
+    }
 
     @Transactional
-    public List<ShelterDeDto> 다운로드(ShelterDeDto shelterDto) {
-        List<ShelterDeDto> lists = new ArrayList<>();
+    public List<ShelterDe> 다운로드(ShelterDe shelterDto) {
+        List<ShelterDe> lists = new ArrayList<>();
 
         try {
 
@@ -58,7 +64,7 @@ public class ShelterDeService {
             System.out.println(shelterList);
 
             for (int i = 0; i < totalCount; i++) {
-                ShelterDeDto result = new ShelterDeDto(
+                ShelterDe result = new ShelterDe(
                         i,
                         shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getCareNm(),
                         shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgNm(),
@@ -95,7 +101,7 @@ public class ShelterDeService {
             System.out.println("사이즈 = " + shelterList.size());
             System.out.println(lists);
 
-            List<ShelterDeDto> shelterEntity = repository.saveAll(lists);
+            List<ShelterDe> shelterEntity = shelterDeRepository.saveAll(lists);
 
             return shelterEntity;
 
